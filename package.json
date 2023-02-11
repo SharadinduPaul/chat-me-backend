@@ -1,0 +1,30 @@
+{
+  "name": "chat-me-backend",
+  "version": "1.0.0",
+  "description": "Chat-me app backend repo",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://SharadinduPaul@github.com/SharadinduPaul/chat-me-backend.git"
+  },
+  "author": "Sharadindu Paul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SharadinduPaul/chat-me-backend/issues"
+  },
+  "homepage": "https://github.com/SharadinduPaul/chat-me-backend#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.1",
+    "nodemon": "^2.0.20"
+  }
+}
