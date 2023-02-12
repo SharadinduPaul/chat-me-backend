@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const messageRoute = require("./routes/messageRoute");
 const cors = require("cors");
 
 const app = express();
@@ -12,7 +13,7 @@ connectDB();
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://localhost:3000"],
   })
 );
 
@@ -27,3 +28,4 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoute);
