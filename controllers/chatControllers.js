@@ -170,6 +170,18 @@ const removFromGroup = asyncHandler(async (req, res) => {
     throw new Error({ message: err.message });
   }
 });
+//PUT /api/chat/delete- {chatId}
+const deleteChat = asyncHandler(async (req, res) => {
+  const { chatId } = req.body;
+
+  try {
+    const deletedChat = await Chat.findByIdAndDelete(chatId)
+    res.status(200).send(deletedChat);
+  } catch (err) {
+    res.status(401);
+    throw new Error({ message: err.message });
+  }
+});
 
 module.exports = {
   accessChat,
@@ -178,4 +190,5 @@ module.exports = {
   renameGroup,
   addToGroup,
   removFromGroup,
+  deleteChat
 };
