@@ -13,7 +13,7 @@ connectDB();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://web-chatme.netlify.app/"],
+    origin: ["http://localhost:3000", "https://web-chatme.netlify.app"],
   })
 );
 
@@ -24,7 +24,7 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["http://localhost:3000", "https://web-chatme.netlify.app/"],
+    origin: ["http://localhost:3000", "https://web-chatme.netlify.app"],
   },
 });
 
