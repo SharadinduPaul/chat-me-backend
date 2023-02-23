@@ -49,21 +49,24 @@ io.on("connection", (socket) => {
 
     chat.users.forEach((user) => {
       if (user._id == sender._id) return;
-      console.log(newMessage);
       socket.in(user._id).emit("message received", newMessage);
     });
   });
+
+  socket.on("typing", (room) => {
+    socket.in(room).emit("typing");
+  });
+  socket.on("stop typing", (room) => {
+    socket.in(room).emit("stop typing");
+  });
+  socket.on("read", (data) => {
+    const { room, users } = data;
+    socket.in(room).emit("read by", { room, users });
+  });
 });
 
-
-
-
-
-
-
-
 app.get("/", (req, res) => {
-  res.send("Hii from home server");
+  res.send("Hey, server is running ...");
 });
 
 app.use("/api/user", userRoutes);

@@ -53,6 +53,7 @@ const fetchChats = asyncHandler(async (req, res) => {
       users: { $elemMatch: { $eq: req.user._id } },
     })
       .populate("users", "-password")
+      .populate("readBy", "-password")
       .populate("latestMessage")
       .sort({ updatedAt: -1 });
 
@@ -175,8 +176,26 @@ const deleteChat = asyncHandler(async (req, res) => {
   const { chatId } = req.body;
 
   try {
-    const deletedChat = await Chat.findByIdAndDelete(chatId)
+    const deletedChat = await Chat.findByIdAndDelete(chatId);
     res.status(200).send(deletedChat);
+  } catch (err) {
+    res.status(401);
+    throw new Error({ message: err.message });
+  }
+});
+//PUT /api/chat/readBy- {chatId, userId}
+const readBy = asyncHandler(async (req, res) => {
+  const { chatId, users } = req.body;
+  if (!chatId) return res.status(401);
+  try {
+    const readByChat = await Chat.findByIdAndUpdate(
+      chatId,
+      { readBy: users },
+      { new: true }
+    )
+      .populate("users", "-password")
+      .populate("readBy", "-password");
+    res.status(200).send(readByChat);
   } catch (err) {
     res.status(401);
     throw new Error({ message: err.message });
@@ -190,5 +209,6 @@ module.exports = {
   renameGroup,
   addToGroup,
   removFromGroup,
-  deleteChat
+  deleteChat,
+  readBy,
 };

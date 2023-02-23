@@ -10,6 +10,12 @@ const chatModel = mongoose.Schema(
         ref: "User",
       },
     ],
+    readBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
     latestMessage: { type: mongoose.Schema.Types.ObjectId, ref: "Message" },
     groupAdmin: {
       type: mongoose.Schema.Types.ObjectId,
