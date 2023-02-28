@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hey, server is running ...");
+  res.send("Hey, server is running !!!");
 });
 
 app.use("/api/user", userRoutes);
